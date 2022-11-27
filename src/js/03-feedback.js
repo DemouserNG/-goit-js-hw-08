@@ -18,8 +18,6 @@ populateTextareaInput();
 let formData = {};
 
 ref.form.addEventListener('input', e => {
-    // console.log(e.target.name);
-    // console.log(e.target.value);
 
     formData[e.target.name] = e.target.value;
     console.log(formData); 
@@ -28,6 +26,7 @@ ref.form.addEventListener('input', e => {
 })
 
 function onFormTextareaInput(e) {
+
     const message = e.target.value;
     console.log(message);
     localStorage.setItem(STORAGE_KEY, message);
@@ -38,6 +37,9 @@ function onFormSubmit(e) {
 
     e.currentTarget.reset();
     // очищає форму після відправлення
+
+    console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+    // збирає ключі і значення (localStorage.getItem) і парсить їх в об єкт
 
     localStorage.removeItem(STORAGE_KEY);
     // очищає localStorage після відправлення
@@ -51,7 +53,6 @@ function populateTextareaInput() {
     if (saveMessage) {
         console.log(saveMessage);
     }
-
     ref.textarea.value = saveMessage;
     ref.input.value = saveMessage;
 }
