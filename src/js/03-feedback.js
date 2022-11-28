@@ -8,30 +8,18 @@ const ref = {
     button: document.querySelector('.feedback-form button')
 }
 
+const formData = {};
+const STORAGE_KEY = 'feedback-form-state';
+populateTextareaInput();
+
 ref.form.addEventListener('input', throttle(onFormTextareaInput, 500));
 ref.form.addEventListener('submit', onFormSubmit);
 
-const STORAGE_KEY = 'feedback-form-state';
-
-populateTextareaInput();
-
-let formData = {};
-
-ref.form.addEventListener('input', e => {
-
-    formData[e.target.name] = e.target.value;
-    console.log(formData); 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-    
-})
-
 function onFormTextareaInput(e) {
-
-    const message = e.target.value;
-    console.log(message);
-    localStorage.setItem(STORAGE_KEY, message);
-     
+    formData[e.target.name] = e.target.value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));   
 }
+
 function onFormSubmit(e) {
     e.preventDefault();
 
@@ -44,16 +32,15 @@ function onFormSubmit(e) {
     localStorage.removeItem(STORAGE_KEY);
     // очищає localStorage після відправлення
 
-
 }
 
 function populateTextareaInput() {
-    const saveMessage = localStorage.getItem(STORAGE_KEY);
+    const saveMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
     if (saveMessage) {
         console.log(saveMessage);
     }
-    ref.textarea.value = saveMessage;
-    ref.input.value = saveMessage;
+    ref.textarea.value = saveMessage.textarea || '';
+    ref.input.value = saveMessage.input || '';
 }
 
