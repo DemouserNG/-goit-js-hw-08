@@ -8,12 +8,12 @@ const ref = {
     button: document.querySelector('.feedback-form button')
 }
 
+ref.form.addEventListener('input', throttle(onFormTextareaInput, 500));
+ref.form.addEventListener('submit', onFormSubmit);
+
 const formData = {};
 const STORAGE_KEY = 'feedback-form-state';
 populateTextareaInput();
-
-ref.form.addEventListener('input', throttle(onFormTextareaInput, 500));
-ref.form.addEventListener('submit', onFormSubmit);
 
 function onFormTextareaInput(e) {
     formData[e.target.name] = e.target.value;
@@ -43,5 +43,4 @@ function populateTextareaInput() {
     ref.textarea.value = saveMessage.textarea || '';
     ref.input.value = saveMessage.input || '';
 }
-
 
