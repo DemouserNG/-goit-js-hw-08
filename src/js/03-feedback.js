@@ -11,8 +11,8 @@ const ref = {
 ref.form.addEventListener('input', throttle(onFormTextareaInput, 500));
 ref.form.addEventListener('submit', onFormSubmit);
 
-const formData = {};
 const STORAGE_KEY = 'feedback-form-state';
+let formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 populateTextareaInput();
 
 function onFormTextareaInput(e) {
