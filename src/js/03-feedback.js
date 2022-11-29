@@ -40,7 +40,7 @@ function populateTextareaInput() {
     if (saveMessage) {
         console.log(saveMessage);
     }
-    ref.textarea.value = saveMessage.textarea || '';
-    ref.input.value = saveMessage.input || '';
+    ref.textarea.value = saveMessage.message || '';
+    ref.input.value = saveMessage.email || '';
 }
 
